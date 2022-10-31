@@ -1,0 +1,89 @@
+@mixin alignItemCenter {
+  display: flex;
+  align-items: center;
+}
+
+@mixin jutifyContentCenter {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin jutifySpacebetween {
+  display: flex;
+  justify-content: space-between;
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin fixed($top, $left, $bottom, $right, $zindex) {
+  position: fixed;
+  top: $top;
+  left: $left;
+  bottom: $bottom;
+  right: $right;
+  z-index: $zindex;
+}
+
+@mixin maxWidth($maxwidth) {
+  @media (max-width: $maxwidth) {
+    @content;
+  }
+}
+
+@mixin minWidth($minwidth) {
+  @media (min-width: $minwidth) {
+    @content;
+  }
+}
+
+@mixin width($minwidth, $maxwidth) {
+  @media (min-width: $minwidth) and (max-width: $maxwidth) {
+    @content;
+  }
+}
+
+@mixin fontSizeTitle($fontsize) {
+  font-size: $fontsize;
+  @include maxWidth(992px) {
+    font-size: 20px;
+  }
+
+  @include maxWidth(768px) {
+    font-size: 18px;
+  }
+}
+
+@mixin marginBottom($marginbottom) {
+  margin-bottom: $marginbottom;
+  @include maxWidth(992px) {
+    margin-bottom: 25px;
+  }
+
+  @include maxWidth(768px) {
+    margin-bottom: 15px;
+  }
+}
+
+@mixin padding($top, $left, $bottom, $right) {
+  padding-top: $top;
+  padding-left: $left;
+  padding-bottom: $bottom;
+  padding-right: $right;
+}
+
+@mixin margin($top, $left, $bottom, $right) {
+  margin-top: $top;
+  margin-left: $left;
+  margin-bottom: $bottom;
+  margin-right: $right;
+}
+
+@mixin font($fontfamily, $fontsize, $colortext) {
+  font-family: $fontfamily;
+  font-size: $fontsize;
+  color: $colortext;
+}
