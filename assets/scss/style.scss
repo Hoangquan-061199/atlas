@@ -1,6 +1,5 @@
 @import './mixin';
 @import './variable';
-
 * {
   margin: 0;
   padding: 0;
@@ -25,6 +24,10 @@
 @font-face {
   font-family: 'robotoBold';
   src: url('../fonts/Roboto-Bold.ttf');
+}
+@font-face {
+  font-family: 'roboto';
+  src: url('../fonts/Roboto-Regular.ttf');
 }
 @media (min-width: 576px) {
   .container {
@@ -54,11 +57,13 @@
   padding-left: 15px;
   padding-right: 15px;
 }
-
 body {
   font-family: 'mulish';
+  overflow-x: hidden;
+  @include maxWidth(992px) {
+    margin-top: $--height-header-mb;
+  }
 }
-
 ul {
   list-style: none;
 }
@@ -68,6 +73,9 @@ a {
   text-decoration: none;
   font-family: mulish;
   cursor: pointer;
+}
+p {
+  @include font(mulish, 14px, $--color-text);
 }
 img {
   max-width: 100%;
@@ -80,8 +88,13 @@ header {
   position: absolute;
   width: 100%;
   height: $--height-header;
+  z-index: 100;
   @include maxWidth(992px) {
     background-color: $--color-main;
+    height: $--height-header-tl;
+  }
+
+  @include maxWidth(568px) {
     height: $--height-header-mb;
   }
 
@@ -187,7 +200,7 @@ header {
     @include fixed(0, 0, unset, 0, 999);
     .container {
       @include flexCenter();
-      height: $--height-header-mb;
+      height: $--height-header-tl;
 
       .logo-mb {
         @include flexCenter;
@@ -195,6 +208,7 @@ header {
         flex: 1;
         .img {
           margin-right: 20px;
+          @include width($--width-logo-tl);
         }
         .name {
           .text {
@@ -309,33 +323,593 @@ header {
   }
 
   @include maxWidth(568px) {
-    .logo-mb {
-      .img {
-        width: 50px;
-        height: 50px;
+    .container {
+      height: $--height-header-mb;
+
+      .logo-mb {
+        .img {
+          @include width($--width-logo-mb);
+        }
+        .name {
+          display: none;
+        }
       }
-      .name {
-        display: none;
+      .menu {
+        width: 70%;
+      }
+
+      .language {
+        .select {
+          select {
+            text-transform: capitalize;
+          }
+        }
+      }
+    }
+  }
+}
+//! Index start
+// search
+.search {
+  position: relative;
+
+  .banner {
+    width: 100%;
+    @include imgResize();
+  }
+
+  .form-search {
+    @include positionAbsoluteCenter();
+    @include alignItemCenter();
+    z-index: 10;
+    .input {
+      @include cssInput();
+      @include width(606px, 40px);
+      margin-right: 14px;
+    }
+
+    .btn {
+      @include width(148px, 40px);
+      button {
+        @include width(100%);
+        @include cssBtn($--color-white, $--color-red);
+        text-transform: uppercase;
       }
     }
 
-    .container {
-      .menu {
-        width: 70%;
+    @include maxWidth(992px) {
+      width: 80%;
+      @include jutifyContentCenter();
+      .input {
+        width: calc(65% - 15px);
+      }
+      .btn {
+        width: 20%;
+      }
+    }
+
+    @include maxWidth(768px) {
+      width: 100%;
+      padding: 0 15px;
+      .input {
+        margin-right: 8px;
+        width: calc(80% - 15px);
+      }
+      .btn {
+        width: 20%;
+        height: 36px;
+        button {
+          font-size: 14px;
+          padding: 0 10px;
+          text-transform: capitalize;
+        }
       }
     }
   }
 }
 
-//! Content
-.content {
-  background: url('../images/bg-index.jpg') no-repeat;
-  background-size: 100%;
+// Về chúng tôi
+.for-me {
+  @include padding(68px, 0, 77px, 0);
+  .title {
+    @include title(30px, 35px, h2);
+  }
 
-  height: 1000px;
+  .desc {
+    p {
+      @include marginBottom(35px);
+      text-align: center;
+    }
+  }
+
+  .see-details {
+    @include cssBtnDetails();
+  }
 }
 
+// Atlas về các loài sinh vật
+.animals {
+  @include padding(0, 0, 63px, 0);
+
+  .title {
+    @include title(30px, 38px, h2);
+  }
+
+  .body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .ani-item {
+      width: calc((100% - 40px) / 3);
+
+      .img {
+        @include marginBottom(17px);
+        img {
+          @include imgResize();
+        }
+      }
+
+      .text {
+        @include alignItemCenter();
+        i {
+          margin: 3px 8px 0;
+          color: $--color-main;
+          @include fontSizeP(20px);
+
+          @include maxWidth(768px) {
+            margin-top: 0;
+          }
+        }
+        p {
+          @include font(mulishBold, 20px, $--color-main);
+          @include fontSizeP(20px);
+        }
+      }
+
+      @include cssHoverImg();
+    }
+
+    @include maxWidth(768px) {
+      gap: 15px;
+      .ani-item {
+        width: calc((100% - 15px) / 2);
+      }
+    }
+    @include maxWidth(468px) {
+      gap: 15px;
+      .ani-item {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Online Atlas
+.onl-atlas {
+  @include padding(0, 0, 62px, 0);
+
+  .title {
+    @include title(30px, 30px, h2);
+  }
+
+  .table {
+    width: 100%;
+    max-height: 500px;
+    overflow: auto;
+    border: 1px solid $--color-border-table;
+    @include hiddenScroll();
+
+    table {
+      width: 100%;
+      tr {
+        display: flex;
+        width: 100%;
+        &:nth-child(2n - 1) {
+          background-color: $--bgc-body-table;
+        }
+
+        &:first-child {
+          background-color: $--bgc-header-table;
+          td {
+            @include font(robotoBold, 14px, $--color-white);
+            text-transform: uppercase;
+          }
+        }
+
+        td {
+          text-align: center;
+          padding: 13px 15px 15px;
+          white-space: nowrap;
+          @include font(mulish, 14px, $--color-text);
+
+          &:first-child {
+            width: 10%;
+          }
+
+          &:not(:first-child) {
+            width: calc(90% / 5);
+            border-left: 1px solid $--color-border-table;
+          }
+        }
+
+        &:not(:first-child) {
+          td:nth-child(3) {
+            color: $--color-text-table;
+          }
+        }
+
+        @include maxWidth(768px) {
+          td {
+            &:first-child {
+              width: 100%;
+            }
+
+            &:not(:first-child) {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Cập nhật mới nhất về các loài sinh vật
+.update-animals {
+  .container {
+    @include padding(0, 15px, 50px, 15px);
+    border-bottom: 1px solid $--color-border-update-ani;
+  }
+  h2.title {
+    @include title(30px, 35px, h2);
+  }
+
+  .slide-ani {
+    .item {
+      @include jutifySpacebetween();
+      background-color: $--bgc-slide-update-animals;
+
+      .text {
+        width: 50%;
+        padding: 0 90px 0 50px;
+        @include cssTextSlideUpdateAni();
+
+        h3.title {
+          @include title(24px, 24px, h3);
+          line-height: 1.2;
+          text-align: justify;
+          @include maxWidth(1200px) {
+            margin-bottom: 15px;
+            @include textLine(2, 20px);
+          }
+
+          &:first-letter {
+            text-transform: capitalize;
+          }
+        }
+
+        .desc {
+          p {
+            @include marginBottom(25px);
+            @include textLine(4, 40px);
+            text-align: justify;
+
+            @include maxWidth(1200px) {
+              margin-bottom: 15px;
+            }
+
+            @include maxWidth(992px) {
+              @include textLine(3, 40px);
+            }
+          }
+        }
+        .see-details {
+          @include cssBtnDetails();
+          margin: 0;
+        }
+      }
+      .img {
+        width: 50%;
+      }
+
+      @include maxWidth(768px) {
+        flex-direction: column-reverse;
+
+        .img,
+        .text {
+          width: 100%;
+        }
+
+        .img {
+          margin-bottom: 15px;
+        }
+
+        .text {
+          padding-bottom: 15px;
+
+          .see-details {
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+
+    .owl-carousel {
+      .owl-item {
+        img {
+          @include imgResize();
+        }
+      }
+    }
+
+    .owl-dots {
+      @include marginTop(38px);
+      @include jutifyContentCenter();
+      .owl-dot {
+        @include width(7px);
+        background-color: $--bgc-dot;
+        margin: 0 6px;
+        border-radius: $--border-radius-clicle;
+
+        &.active {
+          background-color: $--color-main;
+        }
+      }
+    }
+  }
+}
+
+// Tin tức
+.news {
+  @include padding(44px, 0, 44px, 0);
+  h2.title {
+    @include title(30px, 34px, false);
+  }
+
+  .body {
+    @include alignItemCenter();
+    gap: 25px;
+
+    .news-item {
+      width: calc((100% - 75px) / 4);
+
+      .img {
+        @include marginBottom(25px);
+        @include imgResize();
+      }
+
+      .text {
+        .date {
+          @include font(mulish, 14px, $--color-date);
+          @include marginBottom(16px);
+        }
+
+        h3.title {
+          @include title(18px, 18px, h3);
+          @include textLine(2, 30px);
+        }
+
+        p {
+          text-align: justify;
+          @include textLine(3, 30px);
+        }
+      }
+
+      @include cssHoverImg();
+    }
+    @include maxWidth(992px) {
+      gap: 15px;
+      .news-item {
+        width: calc((100% - 45px) / 4);
+      }
+    }
+
+    @include maxWidth(768px) {
+      flex-wrap: wrap;
+      .news-item {
+        width: calc((100% - 15px) / 2);
+      }
+    }
+  }
+}
+//! Index end
+
+//! GIoi thieu start
+.content-about {
+  @include cssListTab();
+}
+
+// về chúng tôi
+.about-us {
+  @include padding(66px, 0, 75px, 0);
+
+  .body {
+    @include jutifyContentCenter();
+    flex-direction: row-reverse;
+    gap: 50px;
+    .desc {
+      width: 56%;
+
+      h2.title {
+        @include title(30px, 34px, h2);
+        text-align: left;
+      }
+
+      p {
+        @include marginBottom(44px);
+        text-align: justify;
+      }
+    }
+
+    .img {
+      width: calc(44% - 50px);
+      @include flexCenter();
+    }
+
+    @include maxWidth(768px) {
+      gap: 0;
+      flex-direction: column-reverse;
+      .desc,
+      .img {
+        width: 100%;
+      }
+    }
+  }
+
+  @include widthMinMax(768px, 1200px) {
+    .body {
+      display: block;
+      .desc {
+        width: 100%;
+      }
+
+      .img {
+        float: right;
+        margin-left: 20px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+//! GIoi thieu end
+
+//! Liên hệ start
+.content-contact {
+  @include cssListTab();
+
+  .block {
+    @include padding(55px, 0, 46px, 0);
+
+    h2.title {
+      @include title(24px, 30px, h2);
+      color: $--color-text;
+      text-align: left;
+    }
+    .container {
+      @include alignItemCenter();
+      align-items: flex-start;
+
+      .info {
+        width: 48%;
+
+        .desc {
+          p {
+            margin-bottom: 14px;
+            img {
+              margin-right: 10px;
+              width: 15px;
+            }
+          }
+        }
+      }
+
+      .form-contact {
+        width: 52%;
+
+        h2.title {
+          @include marginBottom(21px);
+        }
+      }
+    }
+  }
+
+  .map {
+    iframe {
+      width: 100%;
+      margin-bottom: -4px;
+    }
+  }
+}
+//! Liên hệ end
+
 //! Footer
+footer {
+  background-color: $--bgc-footer;
+  .footer-top {
+    @include padding(45px, 0, 30px, 0);
+    border-bottom: 1px solid $--color-border-black;
+
+    .title {
+      @include marginBottom(20px);
+      text-transform: uppercase;
+      @include font(mulishBold, 16px, $--color-text);
+    }
+
+    .block {
+      @include jutifySpacebetween();
+      .footer-item {
+        @include flexCenter();
+        width: 100%;
+
+        .icon {
+          margin-right: 14px;
+          @include width(41px);
+          @include flexCenter();
+        }
+
+        .text {
+          width: calc(100% - 41px - 14px);
+          p {
+            @include font(mulish, 14px, $--color-text);
+            margin-bottom: 9px;
+            overflow-wrap: break-word;
+            strong {
+              font-family: mulishBold;
+            }
+
+            &:last-child {
+              margin-bottom: unset;
+            }
+          }
+        }
+      }
+    }
+
+    @include cssFooterItemResponsive();
+  }
+
+  .footer-bot {
+    @include padding(37px, 0, 40px, 0);
+
+    .block {
+      @include jutifySpacebetween();
+      .footer-item {
+        p {
+          @include font(mulish, 14px, $--color-text);
+          margin-bottom: 9px;
+          strong {
+            font-family: mulishBold;
+          }
+        }
+
+        .select {
+          select {
+            width: $--width-select;
+            height: $--height-select;
+            @include font(mulish, 14px, $--color-text);
+            padding: 0 16px 0 14px;
+            outline: none;
+
+            @include maxWidth(468px) {
+              width: $--width-select-mb;
+            }
+          }
+        }
+
+        .social {
+          @include alignItemCenter();
+          .img {
+            margin-right: 11px;
+            @include width(31px);
+          }
+        }
+      }
+    }
+
+    @include cssFooterItemResponsive();
+  }
+}
 
 .detail-content {
   h2,
