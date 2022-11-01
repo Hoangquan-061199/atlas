@@ -1,3 +1,5 @@
+@import './variable';
+
 @mixin alignItemCenter {
   display: flex;
   align-items: center;
@@ -100,7 +102,9 @@
   }
 
   @include maxWidth(768px) {
-    margin-bottom: 15px;
+    @if ($marginbottom >= 15px) {
+      margin-bottom: 15px;
+    }
   }
 }
 
@@ -187,12 +191,15 @@
       text-transform: capitalize;
     }
   }
+
   @if ($boolean == h2) {
     text-transform: uppercase;
     text-align: center;
     @include font(mulishBold, $fontsize, $--color-main);
     @include fontSizeTitle($fontsize);
-  } @else {
+  }
+
+  @if ($boolean == h1) {
     @include font(mulishBold, $fontsize, $--color-white);
     @include fontSizeTitle($fontsize);
     text-transform: uppercase;
@@ -252,16 +259,16 @@
   }
 }
 
-@mixin cssInput {
+@mixin cssInput($color, $colorborder: $color) {
   input {
     @include width(100%);
     outline: none;
     background-color: transparent;
-    @include font(roboto, 14px, $--color-white);
-    border: 1px solid $--color-white;
+    @include font(roboto, 14px, $color);
+    border: 1px solid $colorborder;
     padding-left: 23px;
     &::placeholder {
-      @include font(roboto, 14px, $--color-white);
+      @include font(roboto, 14px, $color);
     }
 
     @include maxWidth(768px) {
@@ -271,6 +278,28 @@
 
   @include maxWidth(768px) {
     height: 36px;
+  }
+}
+
+@mixin cssTextArea($width, $height, $colorborder, $borderradius, $colortext) {
+  textarea {
+    width: $width;
+    height: $height;
+    outline: none;
+    resize: none;
+    border: 1px solid $colorborder;
+    border-radius: $borderradius;
+    padding-top: 12px;
+    padding-left: 16px;
+    @include font(mulish, 14px, $colortext);
+
+    &::placeholder {
+      @include font(mulish, 14px, $colortext);
+    }
+
+    @include maxWidth(768px) {
+      height: $--height-textarea-mb;
+    }
   }
 }
 
@@ -309,11 +338,11 @@
 @mixin cssBtnDetails {
   @include flexCenter;
   @include cssBtn($--color-white, $--color-main);
-  @include width(130px, 40px);
+  @include width(130px, $--height-btn);
   text-transform: capitalize;
   margin: 0 auto;
   @include maxWidth(992px) {
-    @include width(110px, 37px);
+    @include width(110px, $--height-btn-mb);
   }
 }
 

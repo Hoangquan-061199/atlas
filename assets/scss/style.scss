@@ -363,7 +363,7 @@ header {
     @include alignItemCenter();
     z-index: 10;
     .input {
-      @include cssInput();
+      @include cssInput($--color-white);
       @include width(606px, 40px);
       margin-right: 14px;
     }
@@ -497,7 +497,7 @@ header {
     width: 100%;
     max-height: 500px;
     overflow: auto;
-    border: 1px solid $--color-border-table;
+    border: 1px solid $--color-border-black;
     @include hiddenScroll();
 
     table {
@@ -529,7 +529,7 @@ header {
 
           &:not(:first-child) {
             width: calc(90% / 5);
-            border-left: 1px solid $--color-border-table;
+            border-left: 1px solid $--color-border-black;
           }
         }
 
@@ -713,7 +713,6 @@ header {
     }
   }
 }
-//! Index end
 
 //! GIoi thieu start
 .content-about {
@@ -772,7 +771,6 @@ header {
     }
   }
 }
-//! GIoi thieu end
 
 //! Liên hệ start
 .content-contact {
@@ -789,6 +787,7 @@ header {
     .container {
       @include alignItemCenter();
       align-items: flex-start;
+      gap: 15px;
 
       .info {
         width: 48%;
@@ -796,19 +795,92 @@ header {
         .desc {
           p {
             margin-bottom: 14px;
+            padding-left: 25px;
+            position: relative;
+            overflow-wrap: break-word;
             img {
-              margin-right: 10px;
-              width: 15px;
+              @include positionAbsolute(2px, 0, unset, unset, 1);
             }
           }
         }
       }
 
       .form-contact {
-        width: 52%;
+        width: calc(52% - 15px);
 
         h2.title {
           @include marginBottom(21px);
+        }
+
+        ._form-sub {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+
+          .w-50 {
+            width: calc((100% - 10px) / 2);
+            @include cssInput($--color-input-text, $--color-border-black);
+            height: $--height-btn;
+            input {
+              border-radius: $--border-radius;
+            }
+
+            @include maxWidth(992px) {
+              height: $--height-btn-mb;
+            }
+          }
+          .w-100 {
+            width: 100%;
+            @include cssTextArea(
+              100%,
+              $--height-textarea,
+              $--color-border-black,
+              $--border-radius,
+              $--color-input-text
+            );
+          }
+
+          button {
+            @include cssBtn($--color-white, $--color-red);
+            height: $--height-btn;
+            text-transform: uppercase;
+            padding: 0 20px;
+
+            i {
+              margin-left: 14px;
+              font-size: 12px;
+            }
+
+            @include maxWidth(992px) {
+              height: $--height-btn-mb;
+            }
+          }
+        }
+      }
+
+      @include maxWidth(768px) {
+        flex-direction: column;
+
+        .info,
+        .form-contact {
+          width: 100%;
+        }
+      }
+
+      @include maxWidth(468px) {
+        h2.title {
+          text-transform: lowercase;
+          &::first-letter {
+            text-transform: capitalize;
+          }
+        }
+
+        .form-contact {
+          ._form-sub {
+            .w-50 {
+              width: 100%;
+            }
+          }
         }
       }
     }
@@ -821,7 +893,205 @@ header {
     }
   }
 }
-//! Liên hệ end
+
+//! Các loài quý hiếm
+.content-rare-species {
+  @include cssListTab();
+
+  // danh sach loai quy hiem
+  .lists-species {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 25px;
+    row-gap: 33px;
+    @include padding(50px, 0, 40px, 0);
+
+    .species-item {
+      width: calc((100% - 50px) / 3);
+
+      .img {
+        @include marginBottom(20px);
+      }
+
+      .text {
+        text-align: center;
+
+        .title {
+          @include title(16px, 9px, h3);
+          text-align: center;
+          color: $--color-text;
+
+          @include maxWidth(992px) {
+            margin-bottom: 0;
+          }
+        }
+
+        p {
+          color: $--color-text-species;
+        }
+      }
+
+      @include cssHoverImg();
+    }
+
+    @include maxWidth(992px) {
+      gap: 15px;
+      .species-item {
+        width: calc((100% - 30px) / 3);
+      }
+    }
+
+    @include maxWidth(768px) {
+      .species-item {
+        width: calc((100% - 15px) / 2);
+      }
+    }
+
+    @include maxWidth(468px) {
+      .species-item {
+        width: 100%;
+      }
+    }
+  }
+
+  // so trang
+  .page {
+    @include flexCenter();
+    @include padding(0, 0, 45px, 0);
+
+    a,
+    span {
+      @include width(33px);
+      border: 1px solid $--color-border-page;
+      border-radius: $--border-radius-clicle;
+      transition: background 0.5s linear;
+      @include flexCenter();
+      margin: 0 3.5px;
+      color: $--color-text;
+
+      i {
+        font-size: 14px;
+      }
+
+      &.active-page,
+      &:hover {
+        background-color: $--color-page-active;
+        color: $--color-white;
+      }
+
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      &.hidden {
+        display: none;
+      }
+    }
+  }
+}
+
+//! tra cuu 2
+.content-search {
+  @include cssListTab();
+
+  .animals {
+    @include padding(34px, 0, 35px, 0);
+  }
+
+  .onl-atlas {
+    @include padding(28px, 0, 45px, 0);
+    .table {
+      max-height: 1000px;
+    }
+  }
+}
+
+//! tra cuu chi tiet
+.content-search-details {
+  @include cssListTab();
+
+  .animals-details {
+    @include padding(45px, 0, 45px, 0);
+    .slide-ani {
+      position: relative;
+      ul {
+        li {
+          .block {
+            display: flex;
+            align-items: flex-start;
+            gap: 34px;
+
+            img {
+              width: 52%;
+            }
+            table {
+              width: calc(48% - 34px);
+              tr {
+                display: block;
+                border-bottom: 1px solid $--color-border-black;
+                td {
+                  padding: 19px 0 13px;
+                  @include font(mulish, 16px, $--color-text);
+
+                  &:first-child {
+                    font-weight: bold;
+                    width: 145px;
+                  }
+                }
+
+                &:first-child {
+                  td {
+                    padding-top: 0;
+                  }
+                }
+
+                &:nth-child(2) {
+                  td {
+                    &:nth-child(3) {
+                      color: $--color-text-table;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .img-orther {
+        @include positionAbsolute(unset, 0, 0, unset, 1);
+        @include width(170px, 96px);
+        @include flexCenter();
+        background-color: rgba(0, 0, 0, 0.5);
+        p {
+          @include font(mulishBold, 16px, $--color-white);
+        }
+      }
+    }
+
+    .lSSlideOuter.vertical {
+      .lSGallery {
+        right: unset;
+        left: 0;
+      }
+    }
+
+    .lSSlideOuter {
+      .lSPager.lSGallery {
+        li.active,
+        li:hover {
+          border-radius: unset;
+        }
+
+        img {
+          height: 100%;
+          border-radius: none;
+        }
+      }
+    }
+  }
+}
 
 //! Footer
 footer {
@@ -1002,7 +1272,6 @@ footer {
 
   .image-right {
     display: flex;
-    align-items: end;
     justify-content: center;
     flex-direction: column;
 
