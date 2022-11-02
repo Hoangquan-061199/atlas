@@ -438,3 +438,154 @@
     }
   }
 }
+
+@mixin cssPage {
+  @include flexCenter();
+  @include padding(0, 0, 45px, 0);
+
+  a,
+  span {
+    @include width(33px);
+    border: 1px solid $--color-border-page;
+    border-radius: $--border-radius-clicle;
+    transition: background 0.5s linear;
+    @include flexCenter();
+    margin: 0 3.5px;
+    color: $--color-text;
+
+    i {
+      font-size: 14px;
+    }
+
+    &.active-page,
+    &:hover {
+      background-color: $--color-page-active;
+      color: $--color-white;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+}
+
+@mixin cssItemAnimals {
+  .item {
+    @include jutifySpacebetween();
+    background-color: $--bgc-slide-update-animals;
+
+    .text {
+      width: 50%;
+      padding: 0 90px 0 50px;
+      @include cssTextSlideUpdateAni();
+
+      h3.title {
+        @include title(24px, 24px, h3);
+        line-height: 1.2;
+        text-align: justify;
+        @include maxWidth(1200px) {
+          margin-bottom: 15px;
+          @include textLine(2, 20px);
+        }
+
+        &:first-letter {
+          text-transform: capitalize;
+        }
+      }
+
+      .desc {
+        p {
+          @include marginBottom(25px);
+          @include textLine(4, 40px);
+          text-align: justify;
+
+          @include maxWidth(1200px) {
+            margin-bottom: 15px;
+          }
+
+          @include maxWidth(992px) {
+            @include textLine(3, 40px);
+          }
+        }
+      }
+      .see-details {
+        @include cssBtnDetails();
+        margin: 0;
+      }
+    }
+    .img {
+      width: 50%;
+    }
+
+    @include maxWidth(768px) {
+      flex-direction: column-reverse;
+
+      .img,
+      .text {
+        width: 100%;
+      }
+
+      .img {
+        margin-bottom: 15px;
+      }
+
+      .text {
+        padding-bottom: 15px;
+
+        .see-details {
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+@mixin cssNewsItem {
+  @include alignItemCenter();
+  gap: 25px;
+  .news-item {
+    width: calc((100% - 75px) / 4);
+
+    .img {
+      @include marginBottom(25px);
+      @include imgResize();
+    }
+
+    .text {
+      .date {
+        @include font(mulish, 14px, $--color-date);
+        @include marginBottom(16px);
+      }
+
+      h3.title {
+        @include title(18px, 18px, h3);
+        @include textLine(2, 30px);
+      }
+
+      p {
+        text-align: justify;
+        @include textLine(3, 30px);
+      }
+    }
+
+    @include cssHoverImg();
+  }
+  @include maxWidth(992px) {
+    gap: 15px;
+    .news-item {
+      width: calc((100% - 45px) / 4);
+    }
+  }
+
+  @include maxWidth(768px) {
+    flex-wrap: wrap;
+    .news-item {
+      width: calc((100% - 15px) / 2);
+    }
+  }
+}
