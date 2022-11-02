@@ -27,11 +27,16 @@ $(() => {
 
   resizeImage('.animals .body .ani-item .img', 226 / 420);
   resizeImage('.body .news-item .img', 160 / 307);
-  resizeImage('.search .banner', 685 / 1366);
+  resizeImage('.search .banner', 436 / 1366);
+  resizeImage('.search.index .banner', 685 / 1366);
   resizeImage('.species-item .img', 237 / 418);
   resizeImage(
-    '.content-about .search .banner, .content-contact .search .banner, .content-rare-species .search .banner, .content-search .search .banner, .content-search-details .search .banner, .content-news .search .banner',
-    436 / 1366
+    '.content-news-details .container .right .lists-item .item .img',
+    54 / 104
+  );
+  resizeImage(
+    '.content-news-details .container .left .block .desc .img',
+    533 / 929
   );
 
   if ($(window).width() >= 768) {

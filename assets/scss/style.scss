@@ -1060,8 +1060,120 @@ header {
 }
 
 //! Tin tuc chi tiet
-.content-news-deatails {
+.content-news-details {
   @include cssListTab();
+
+  .container {
+    @include padding(44px, 0, 0, 0);
+    display: flex;
+    gap: 44px;
+
+    .left {
+      width: calc(75% - 44px);
+      .block {
+        @include padding(0, 0, 105px, 0);
+        h2.title {
+          @include title(24px, 26px, h2);
+          text-align: left;
+          color: $--color-text;
+        }
+        & > .text {
+          border-bottom: 1px solid $--color-border-black;
+          @include jutifySpacebetween();
+          padding-bottom: 5px;
+          @include marginBottom(33px);
+
+          .date {
+            @include alignItemCenter();
+            .img {
+              margin-right: 10px;
+              margin-top: 5px;
+            }
+
+            span {
+              @include font(mulish, 16px, $--color-date);
+            }
+          }
+        }
+
+        .desc {
+          .image {
+            width: 100%;
+            background-color: $--bgc-color-img-desc;
+            .img {
+              @include imgResize();
+            }
+            p {
+              @include fontSizeP(15px);
+              padding: 10px 0;
+              text-align: center;
+            }
+          }
+          p {
+            @include marginBottom(30px);
+            @include fontSizeP(16px);
+            text-align: justify;
+          }
+        }
+      }
+
+      .orther {
+        @include padding(20px, 0, 50px, 0);
+        border-top: 1px solid $--color-border-black;
+        h2.title {
+          color: $--color-text-species;
+          text-transform: uppercase;
+          @include marginBottom(24px);
+        }
+        .body {
+          @include cssNewsItem();
+          flex-wrap: wrap;
+          gap: 35px;
+
+          .news-item {
+            width: calc((100% - 70px) / 3);
+            .text {
+              .desc {
+                h3.title {
+                  @include title(16px, 26px, h3);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .right {
+      width: 25%;
+
+      h2.title {
+        @include title(24px, 26px, h2);
+        text-align: left;
+        color: $--color-text-species;
+      }
+
+      .lists-item {
+        .item {
+          display: flex;
+          gap: 15px;
+          padding: 15px 0;
+          border-top: 1px solid $--color-border-black;
+
+          .img {
+            width: 32%;
+          }
+          p {
+            width: calc(68% - 15px);
+          }
+
+          &:first-child {
+            border-top: none;
+            padding-top: 0;
+          }
+        }
+      }
+    }
+  }
 }
 
 //! Footer

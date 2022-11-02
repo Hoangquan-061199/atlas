@@ -85,11 +85,19 @@
 @mixin fontSizeTitleH3($fontsize) {
   font-size: $fontsize;
   @include maxWidth(992px) {
-    font-size: 18px;
+    @if ($fontsize >= 18px) {
+      font-size: 18px;
+    } @else {
+      font-size: $fontsize;
+    }
   }
 
   @include maxWidth(768px) {
-    font-size: 16px;
+    @if ($fontsize >= 16px) {
+      font-size: 16px;
+    } @else {
+      font-size: $fontsize;
+    }
   }
 }
 
