@@ -34,66 +34,66 @@ $(() => {
     '.content-news-details .container .right .lists-item .item .img',
     54 / 104
   );
-  resizeImage(
-    '.content-search-details .animals-details .slide-ani ul li .block .img',
-    324 / 575
-  );
 
   resizeImage(
     '.content-news-details .container .left .block .desc .img',
-    533 / 929
+    534 / 929
   );
-  resizeImage('.lslide.active', 510 / 768);
+
+  // resizeImage('.content-search-details .animals-details .left .item', 84 / 120);
+  if ($(window).width() >= 1200) {
+    resizeImage(
+      '.content-search-details .animals-details .right .img',
+      329 / 575
+    );
+    // resizeImage(
+    //   '.content-search-details .animals-details .left .item',
+    //   98 / 173
+    // );
+  }
+  if ($(window).width() >= 992 && $(window).width() < 1200) {
+    resizeImage(
+      '.content-search-details .animals-details .right .img',
+      292 / 575
+    );
+  }
+
+  if ($(window).width() >= 768 && $(window).width() < 992) {
+    resizeImage(
+      '.content-search-details .animals-details .right .img',
+      332 / 575
+    );
+  }
 
   if ($(window).width() >= 768) {
     resizeImage('.slide-ani.owl-carousel .owl-item .img', 340 / 650);
   }
 
   if ($(window).width() < 768) {
-    // resizeImage('section.map', 385 / 1366);
-  }
-});
+    resizeImage(
+      '.content-search-details .animals-details .right .img',
+      332 / 575
+    );
 
-if ($('.animals-details .slide-ani').length > 0) {
-  $(document).ready(function () {
-    if ($(window).width() >= 1200) {
-      $('#lightSliderVertical').lightSlider({
-        gallery: true,
-        item: 1,
-        verticalHeight: 326,
-        vThumbWidth: 173,
-        thumbItem: 3,
-        thumbMargin: 18,
-        enableDrag: false,
-        slideMargin: 0,
-        vertical: true,
-      });
-    }
-    if ($(window).width() >= 992 && $(window).width() < 1200) {
-      $('#lightSliderVertical').lightSlider({
-        gallery: true,
-        item: 1,
-        verticalHeight: 314,
-        vThumbWidth: 173,
-        thumbItem: 3,
-        thumbMargin: 15,
-        enableDrag: false,
-        slideMargin: 0,
-        vertical: true,
-      });
-    }
-    if ($(window).width() < 992) {
-      $('#lightSliderVertical').lightSlider({
-        gallery: true,
-        item: 1,
-        loop: true,
-        thumbItem: 3,
-        slideMargin: 0,
-        thumbMargin: 15,
-        galleryMargin: 15,
-        enableDrag: false,
-        vertical: false,
-      });
-    }
+    let heightAniDetails = $(
+      '.content-search-details .animals-details .right .item'
+    ).height();
+
+    $('.content-search-details .animals-details .left').css(
+      'padding-top',
+      heightAniDetails
+    );
+  }
+
+  $('.animals-details .container .left .img').click(function () {
+    let index = $(this).data('index');
+    let item = $('.animals-details .container .right .item');
+    item.each(function () {
+      if (index === $(this).data('index')) {
+        $(this).addClass('active');
+      } else {
+        $(this).removeClass('active');
+      }
+    });
   });
-}
+});

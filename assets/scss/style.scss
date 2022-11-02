@@ -876,138 +876,168 @@ header {
     .container {
       @include padding(45px, 15px, 45px, 15px);
       border-bottom: 1px solid $--color-border-black;
-    }
-    .slide-ani {
-      position: relative;
-      ul {
-        li {
-          .block {
-            display: flex;
-            align-items: flex-start;
+      display: flex;
+      gap: 18px;
 
-            .img {
-              width: 52%;
-              @include imgResize();
-              margin-right: 34px;
-            }
-            table {
-              width: calc(48% - 34px);
-              border-collapse: collapse;
-              tr {
-                td {
-                  border-bottom: 1px solid $--color-border-black;
-                  padding: 19px 0 13px;
-                  @include font(mulish, 16px, $--color-text);
-                  @include maxWidth(992px) {
-                    padding: 10px 0;
-                  }
+      .left {
+        width: calc(15% - 18px);
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        gap: 13px;
 
-                  &:first-child {
-                    font-weight: bold;
-                    width: 145px;
+        @include imgResize();
 
-                    @include maxWidth(1200px) {
-                      width: 110px;
-                    }
+        .item {
+          position: relative;
+          .num-orther {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            @include flexCenter();
+            @include font(mulishBold, 16px, $--color-white);
+          }
+        }
+      }
 
-                    @include maxWidth(768px) {
-                      width: unset;
-                    }
-                  }
+      .right {
+        width: 85%;
+        position: relative;
+        .item {
+          display: flex;
+          align-items: flex-start;
+          width: 100%;
+          opacity: 0;
+          transition: opacity 0.5s linear;
+          pointer-events: none;
+          position: absolute;
+          top: 0;
+          .img {
+            width: 52%;
+            @include imgResize();
+            margin-right: 34px;
+          }
+          table {
+            width: calc(48% - 34px);
+            border-collapse: collapse;
+            tr {
+              td {
+                border-bottom: 1px solid $--color-border-black;
+                padding: 19px 0 13px;
+                @include font(mulish, 16px, $--color-text);
+                @include maxWidth(992px) {
+                  padding: 10px 0;
                 }
 
                 &:first-child {
-                  td {
-                    padding-top: 0;
+                  font-weight: bold;
+                  width: 145px;
+
+                  @include maxWidth(1200px) {
+                    width: 110px;
+                  }
+
+                  @include maxWidth(768px) {
+                    width: unset;
                   }
                 }
+              }
 
-                &:nth-child(2) {
-                  td {
-                    &:nth-child(3) {
-                      color: $--color-text-table;
-                    }
+              &:first-child {
+                td {
+                  padding-top: 0;
+                }
+              }
+
+              &:nth-child(2) {
+                td {
+                  &:nth-child(3) {
+                    color: $--color-text-table;
                   }
                 }
               }
             }
+          }
 
-            @include maxWidth(1200px) {
-              .img {
-                width: 60%;
-                margin-right: 15px;
-              }
+          &.active {
+            opacity: 1;
+            pointer-events: all;
+          }
 
-              table {
-                width: calc(40% - 15px);
+          @include maxWidth(1200px) {
+            .img {
+              width: 60%;
+              margin-right: 15px;
+            }
+
+            table {
+              width: calc(40% - 15px);
+            }
+          }
+
+          @include maxWidth(768px) {
+            flex-direction: column;
+            .img,
+            table {
+              width: 100%;
+              tr td {
+                font-size: 14px;
               }
             }
 
-            @include maxWidth(768px) {
-              flex-direction: column;
-              .img,
-              table {
-                width: 100%;
-              }
+            .img {
+              margin-bottom: 15px;
+              margin-right: 0;
+            }
+          }
+        }
+      }
 
-              .img {
-                margin-bottom: 15px;
-                margin-right: 0;
+      @include maxWidth(1200px) {
+        gap: 15px;
+        .left {
+          gap: 15px;
+        }
+
+        .right {
+          .item {
+            table {
+              tr td {
+                padding: 15px 0;
               }
             }
           }
         }
       }
 
-      .img-orther {
-        @include positionAbsolute(unset, 0, 0, unset, 1);
-        @include width(173px, 96px);
-        @include flexCenter();
-        background-color: rgba(0, 0, 0, 0.5);
-        p {
-          @include font(mulishBold, 16px, $--color-white);
+      @include maxWidth(992px) {
+        flex-direction: column-reverse;
+
+        .left {
+          flex-direction: row;
+          padding-top: 240px;
+          width: 100%;
+          .item {
+            width: calc((100% - 30px) / 3);
+            position: relative;
+          }
+
+          .num-orther {
+            height: 100%;
+          }
         }
 
-        @include maxWidth(992px) {
-          left: unset;
-          right: 0;
-          @include width(220px, 124px);
+        .right {
+          width: 100%;
         }
-
-        @include maxWidth(768px) {
-          @include width(160px, 90px);
-        }
-        display: none;
-      }
-    }
-
-    .lSSlideOuter.vertical {
-      padding-right: unset !important;
-      padding-left: 191px;
-
-      .lSGallery {
-        right: unset;
-        left: 0;
-        margin-left: 0 !important;
-      }
-    }
-    .lightSlider.lSSlide {
-      @include widthMinMax(768px, 992px) {
-        height: 233px !important;
       }
 
       @include maxWidth(768px) {
-        // height: 510px !important;
-      }
-    }
-
-    .lSSlideOuter {
-      .lSPager.lSGallery {
-        li {
-          &:hover,
-          &.active {
-            border-radius: 0;
-          }
+        .left {
+          padding-top: 560px;
         }
       }
     }
