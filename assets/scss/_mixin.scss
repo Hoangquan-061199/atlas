@@ -194,10 +194,6 @@
   @if ($boolean == h3) {
     @include font(mulishBold, $fontsize, $--color-text);
     @include fontSizeTitleH3($fontsize);
-    text-align: left;
-    &:first-letter {
-      text-transform: capitalize;
-    }
   }
 
   @if ($boolean == h2) {
@@ -495,14 +491,10 @@
       h3.title {
         @include title(24px, 24px, h3);
         line-height: 1.2;
-        text-align: justify;
+        text-align: left;
         @include maxWidth(1200px) {
           margin-bottom: 15px;
           @include textLine(2, 20px);
-        }
-
-        &:first-letter {
-          text-transform: capitalize;
         }
       }
 
