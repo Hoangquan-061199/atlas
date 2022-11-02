@@ -35,9 +35,15 @@ $(() => {
     54 / 104
   );
   resizeImage(
+    '.content-search-details .animals-details .slide-ani ul li .block .img',
+    324 / 575
+  );
+
+  resizeImage(
     '.content-news-details .container .left .block .desc .img',
     533 / 929
   );
+  resizeImage('.lslide.active', 510 / 768);
 
   if ($(window).width() >= 768) {
     resizeImage('.slide-ani.owl-carousel .owl-item .img', 340 / 650);
@@ -49,48 +55,45 @@ $(() => {
 });
 
 if ($('.animals-details .slide-ani').length > 0) {
-  $ = jQuery;
   $(document).ready(function () {
-    $v_slider_options = {
-      gallery: true,
-      item: 1,
-      loop: true,
-      slideMargin: 0,
-      thumbItem: 3,
-      galleryMargin: 18,
-      thumbMargin: 18,
-      vertical: true,
-      verticalHeight: 326,
-      vThumbWidth: 173,
-      controls: false,
-    };
-
-    v_slider = $('#lightSliderVertical').lightSlider($v_slider_options);
-
-    /* Fancybox & lightSlider Sync - Bug Fix */
-    $selector = '#lightSliderVertical li:not(".clone") a';
-    $().fancybox({
-      selector: $selector,
-      backFocus: false, //The most important options for sync bug fix
-      buttons: [
-        'slideShow',
-        'share',
-        'zoom',
-        'fullScreen',
-        'thumbs',
-        'download',
-        'close',
-      ],
-    });
-
-    $('.img-orther').fancybox({});
-  });
-
-  // #RESIZE BUG FIXING
-  // # if slider have height in % or vh,
-  // # on resize rebuild
-  $(window).resize(function () {
-    slider.destroy();
-    h_slider = $('#ocassions-slider').lightSlider(h_slider_options);
+    if ($(window).width() >= 1200) {
+      $('#lightSliderVertical').lightSlider({
+        gallery: true,
+        item: 1,
+        verticalHeight: 326,
+        vThumbWidth: 173,
+        thumbItem: 3,
+        thumbMargin: 18,
+        enableDrag: false,
+        slideMargin: 0,
+        vertical: true,
+      });
+    }
+    if ($(window).width() >= 992 && $(window).width() < 1200) {
+      $('#lightSliderVertical').lightSlider({
+        gallery: true,
+        item: 1,
+        verticalHeight: 314,
+        vThumbWidth: 173,
+        thumbItem: 3,
+        thumbMargin: 15,
+        enableDrag: false,
+        slideMargin: 0,
+        vertical: true,
+      });
+    }
+    if ($(window).width() < 992) {
+      $('#lightSliderVertical').lightSlider({
+        gallery: true,
+        item: 1,
+        loop: true,
+        thumbItem: 3,
+        slideMargin: 0,
+        thumbMargin: 15,
+        galleryMargin: 15,
+        enableDrag: false,
+        vertical: false,
+      });
+    }
   });
 }
